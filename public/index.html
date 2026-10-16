@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SnapList AI | Open-Source E-Commerce Listing & SEO Generator</title>
+  <meta name="description" content="AI listing and SEO generator for Etsy, eBay & Shopify powered by open-weight models (Llama 3.2, Mistral, Qwen). Turn product photos & notes into high-converting listings with zero vendor lock-in." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+
+  <!-- Header / Navigation -->
+  <header class="app-header">
+    <div class="container header-container">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#brand-grad)" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="brand-grad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#10B981"/>
+                <stop offset="1" stop-color="#06B6D4"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">SnapList <span class="badge-ai">AI</span></span>
+          <span class="brand-subtitle">Open-Source Side Hustle Engine</span>
+        </div>
+      </div>
+
+      <div class="header-badges">
+        <span class="pill pill-green" id="engine-status">
+          <span class="dot pulse"></span> Open-Weight Inference Ready
+        </span>
+        <a href="#open-manifesto" class="pill pill-ghost">Why Open AI?</a>
+        <a href="#savings-section" class="pill pill-ghost">ROI Calculator</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-content">
+      <div class="theme-callout">
+        <span class="sparkle">✨</span> DEV Open-Source AI Side Hustle Challenge • 100% Open Weights
+      </div>
+      <h1 class="hero-title">
+        Turn Product Notes Into <span class="gradient-text">High-Converting Listings</span> in Seconds.
+      </h1>
+      <p class="hero-desc">
+        Crafted for Etsy artisans, eBay flippers, and indie sellers. Powered by <strong>Llama 3.2</strong>, <strong>Mistral 7B</strong>, and <strong>Qwen 2.5</strong>. Keep your customer margins safe without expensive proprietary vendor lock-in.
+      </p>
+
+      <!-- Quick Open Metric Stats -->
+      <div class="metric-ribbon">
+        <div class="metric-item">
+          <span class="metric-value">98%</span>
+          <span class="metric-label">Lower Cost vs Closed APIs</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-item">
+          <span class="metric-value">0%</span>
+          <span class="metric-label">Customer Data Leakage</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-item">
+          <span class="metric-value">3+</span>
+          <span class="metric-label">Swappable Open Models</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-item">
+          <span class="metric-value">Render</span>
+          <span class="metric-label">Ready in 1-Click</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Workstation Layout -->
+  <main class="container main-grid">
+    
+    <!-- LEFT COLUMN: Generator Controls -->
+    <div class="panel form-panel">
+      <div class="panel-header">
+        <div class="panel-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div>
+          <h2 class="panel-title">Product Studio</h2>
+          <p class="panel-subtitle">Feed your product details or upload sample photos</p>
+        </div>
+      </div>
+
+      <form id="listing-form">
+        <!-- Item Title -->
+        <div class="input-group">
+          <label for="item-name" class="input-label">Product Name or Raw Note <span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="item-name" 
+            name="itemName" 
+            class="input-field" 
+            placeholder="e.g. Handmade Ceramic Matcha Bowl with Bamboo Whisk Set" 
+            required 
+          />
+        </div>
+
+        <!-- Platform & Category Row -->
+        <div class="input-row">
+          <div class="input-group flex-1">
+            <label for="platform" class="input-label">Target Marketplace</label>
+            <select id="platform" name="platform" class="input-field">
+              <option value="Etsy" selected>Etsy (Artisan & Handmade)</option>
+              <option value="eBay">eBay (Reselling & Collectibles)</option>
+              <option value="Shopify">Shopify (DTC Brand & Luxury)</option>
+              <option value="Amazon">Amazon Handmade</option>
+            </select>
+          </div>
+          <div class="input-group flex-1">
+            <label for="category" class="input-label">Category</label>
+            <input 
+              type="text" 
+              id="category" 
+              name="category" 
+              class="input-field" 
+              placeholder="e.g. Kitchen & Dining / Ceramics" 
+              value="Home & Kitchen / Ceramics" 
+            />
+          </div>
+        </div>
+
+        <!-- Condition & Tone Row -->
+        <div class="input-row">
+          <div class="input-group flex-1">
+            <label for="condition" class="input-label">Item Condition</label>
+            <select id="condition" name="condition" class="input-field">
+              <option value="Brand New / Handmade" selected>Brand New / Handmade</option>
+              <option value="Vintage / Pre-owned (Like New)">Vintage / Pre-owned (Like New)</option>
+              <option value="Vintage / Pre-owned (Good patina)">Vintage (Patina & Character)</option>
+              <option value="Upcycled / Refurbished">Upcycled / Refurbished</option>
+            </select>
+          </div>
+          <div class="input-group flex-1">
+            <label for="tone" class="input-label">Copy Tone</label>
+            <select id="tone" name="tone" class="input-field">
+              <option value="Vibrant & Story-Driven" selected>Vibrant & Story-Driven</option>
+              <option value="Minimalist & Modern">Minimalist & Modern</option>
+              <option value="Collector & Provenance Focused">Collector & Provenance Focused</option>
+              <option value="High-Urgency & Promotional">High-Urgency & Promotional</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Extra Details & Target Price -->
+        <div class="input-row">
+          <div class="input-group flex-1">
+            <label for="target-price" class="input-label">Target Price (Optional)</label>
+            <input 
+              type="text" 
+              id="target-price" 
+              name="targetPrice" 
+              class="input-field" 
+              placeholder="e.g. $45" 
+            />
+          </div>
+          <div class="input-group flex-2">
+            <label for="details" class="input-label">Key Features / Materials / Dimensions</label>
+            <input 
+              type="text" 
+              id="details" 
+              name="details" 
+              class="input-field" 
+              placeholder="e.g. 14oz capacity, speckled stoneware, dishwasher safe, includes organic chasen" 
+            />
+          </div>
+        </div>
+
+        <!-- Photo Dropzone -->
+        <div class="input-group">
+          <label class="input-label">Product Photos (Simulated Vision Pipeline)</label>
+          <div class="dropzone" id="photo-dropzone">
+            <input type="file" id="photo-input" name="photos" accept="image/*" multiple class="file-hidden" />
+            <div class="dropzone-content">
+              <div class="dropzone-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+              <p class="dropzone-text"><strong>Click to upload</strong> or drag & drop item images</p>
+              <span class="dropzone-hint">PNG, JPG, WebP up to 10MB</span>
+            </div>
+            <div class="preview-container" id="preview-container"></div>
+          </div>
+        </div>
+
+        <!-- Open Model Selector & Sovereign AI Settings Accordion -->
+        <div class="model-settings-box">
+          <div class="model-settings-toggle" id="model-toggle">
+            <div class="model-title-group">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.5h-2v-2h2zm0-4.5h-2V7h2z"/></svg>
+              <span>AI Engine: <strong id="selected-model-name">Llama 3.2 3B</strong></span>
+            </div>
+            <span class="chevron" id="model-chevron">▼</span>
+          </div>
+
+          <div class="model-drawer" id="model-drawer">
+            <div class="input-group">
+              <label for="model-selector" class="input-label">Select Open-Weight Model Architecture</label>
+              <select id="model-selector" name="model" class="input-field">
+                <option value="llama" selected>Meta Llama 3.2 (3B-Instruct) — Fast, balanced, low resource</option>
+                <option value="mistral">Mistral AI 7B (v0.3-Instruct) — High reasoning, refined e-commerce prose</option>
+                <option value="qwen">Alibaba Qwen 2.5 (7B-Instruct) — Unmatched JSON precision & tag SEO</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="custom-endpoint" class="input-label">
+                Self-Hosted / Local Node Endpoint (Optional)
+                <span class="pill pill-xs pill-cyan">Zero Data Leakage</span>
+              </label>
+              <input 
+                type="text" 
+                id="custom-endpoint" 
+                name="customEndpoint" 
+                class="input-field font-mono" 
+                placeholder="http://localhost:11434/api/generate or vLLM URL" 
+              />
+              <span class="field-hint">Supports Ollama, LocalAI, or custom vLLM server instances.</span>
+            </div>
+
+            <div class="input-group">
+              <label for="user-api-key" class="input-label">Hugging Face User Access Token (Optional)</label>
+              <input 
+                type="password" 
+                id="user-api-key" 
+                name="userApiKey" 
+                class="input-field font-mono" 
+                placeholder="hf_..." 
+              />
+              <span class="field-hint">Leave blank to use pre-configured engine / instant local fallback.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sample Quick Fill Chips -->
+        <div class="sample-chips">
+          <span class="sample-label">Try Example:</span>
+          <button type="button" class="chip" data-sample="pottery">🏺 Ceramic Matcha Set</button>
+          <button type="button" class="chip" data-sample="vintage">📻 1970s Retro Cassette Player</button>
+          <button type="button" class="chip" data-sample="leather">💼 Full-Grain Leather Laptop Bag</button>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" id="generate-btn" class="btn-primary w-full">
+          <span class="btn-text">Generate Optimized Listing</span>
+          <div class="spinner hidden" id="spinner"></div>
+        </button>
+      </form>
+    </div>
+
+    <!-- RIGHT COLUMN: Generated Output & Export -->
+    <div class="panel output-panel">
+      <div class="panel-header justify-between">
+        <div class="flex-align-center gap-2">
+          <div class="panel-icon icon-success">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <h2 class="panel-title">Generated Listing Output</h2>
+            <p class="panel-subtitle" id="output-meta">Ready to copy directly into your marketplace</p>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button type="button" id="copy-all-btn" class="btn-secondary btn-sm" title="Copy full formatted listing">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy All
+          </button>
+          <button type="button" id="download-json-btn" class="btn-secondary btn-sm" title="Download Listing JSON">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            JSON
+          </button>
+        </div>
+      </div>
+
+      <!-- Output Body / Tabs -->
+      <div class="output-body" id="output-body">
+        
+        <!-- Empty Placeholder State -->
+        <div class="empty-state" id="empty-state">
+          <div class="empty-illustration">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+          </div>
+          <h3>No Listing Generated Yet</h3>
+          <p>Fill out the product information on the left or click one of the example items to craft your first open-source listing.</p>
+        </div>
+
+        <!-- Rendered Result Display (Initially hidden) -->
+        <div class="result-container hidden" id="result-container">
+          
+          <!-- Inference Badge Card -->
+          <div class="inference-info-bar">
+            <div class="flex-align-center gap-1">
+              <span class="badge-dot"></span>
+              <span id="res-provider">Model: Meta Llama 3.2</span>
+            </div>
+            <div class="flex-align-center gap-2">
+              <span class="badge-time" id="res-latency">⚡ 412ms</span>
+              <span class="pill pill-xs pill-gold" id="res-pricing">Suggested: $45 - $68</span>
+            </div>
+          </div>
+
+          <!-- Section 1: Listing Title -->
+          <div class="output-card">
+            <div class="card-title-bar">
+              <span class="card-label">Optimized Marketplace Title (Maximized Click-Through)</span>
+              <button class="btn-copy-mini" data-copy="res-title">Copy</button>
+            </div>
+            <div class="listing-title-box" id="res-title"></div>
+          </div>
+
+          <!-- Section 2: Platform Algorithm Advice -->
+          <div class="tip-card" id="res-advice-box">
+            <div class="tip-icon">💡</div>
+            <div class="tip-text" id="res-advice"></div>
+          </div>
+
+          <!-- Section 3: 13 Algorithmic Tags (Etsy / eBay / SEO) -->
+          <div class="output-card">
+            <div class="card-title-bar">
+              <span class="card-label">13 Search Tags & Keywords (Click tag to copy)</span>
+              <button class="btn-copy-mini" id="copy-tags-btn">Copy All Tags</button>
+            </div>
+            <div class="tag-cloud" id="res-tags"></div>
+          </div>
+
+          <!-- Section 4: Key Feature Bullets -->
+          <div class="output-card">
+            <div class="card-title-bar">
+              <span class="card-label">Conversion Feature Bullets</span>
+              <button class="btn-copy-mini" data-copy="res-bullets">Copy</button>
+            </div>
+            <ul class="bullet-list" id="res-bullets"></ul>
+          </div>
+
+          <!-- Section 5: Full Product Story / Description -->
+          <div class="output-card">
+            <div class="card-title-bar">
+              <span class="card-label">Story-Driven Product Description</span>
+              <button class="btn-copy-mini" data-copy="res-description">Copy</button>
+            </div>
+            <div class="description-box" id="res-description"></div>
+          </div>
+
+          <!-- Section 6: Target SEO Queries -->
+          <div class="output-card">
+            <div class="card-title-bar">
+              <span class="card-label">Long-Tail Search Intent & Google Shopping SEO</span>
+            </div>
+            <div class="seo-badges" id="res-seo"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- SAVINGS CALCULATOR & THEME COMPARISON -->
+  <section class="section-container" id="savings-section">
+    <div class="container">
+      <div class="section-badge">Side Hustle Unit Economics</div>
+      <h2 class="section-title">Why Open AI Makes Your Side Hustle <span class="gradient-text">Actually Profitable</span></h2>
+      <p class="section-desc">
+        Proprietary APIs charge $0.02 - $0.06 every time you generate listings or analyze an image. When you're managing hundreds of vintage or handmade inventory items, those micro-fees evaporate your profit margin. Open weights change the math completely.
+      </p>
+
+      <div class="savings-grid">
+        <!-- Interactive Slider Card -->
+        <div class="calc-card">
+          <h3>Simulate Your Monthly Inventory Volume</h3>
+          <p class="calc-sub">Drag the slider to calculate your savings when running on Open Weights vs Closed Proprietary APIs:</p>
+          
+          <div class="slider-wrapper">
+            <div class="slider-value-display">
+              <span id="slider-number">500</span> listings / month
+            </div>
+            <input type="range" id="volume-slider" min="50" max="5000" step="50" value="500" class="custom-slider" />
+            <div class="slider-ticks">
+              <span>50</span>
+              <span>1,000</span>
+              <span>2,500</span>
+              <span>5,000</span>
+            </div>
+          </div>
+
+          <div class="cost-comparison-row">
+            <div class="cost-box cost-closed">
+              <span class="cost-type">Closed Proprietary API</span>
+              <span class="cost-amount" id="closed-cost">$17.50 /mo</span>
+              <span class="cost-note">API rate spikes & lock-in</span>
+            </div>
+            <div class="cost-vs">VS</div>
+            <div class="cost-box cost-open">
+              <span class="cost-type">SnapList Open-Weight AI</span>
+              <span class="cost-amount" id="open-cost">$0.40 /mo</span>
+              <span class="cost-note">Predictable, self-hosted on Render</span>
+            </div>
+          </div>
+
+          <div class="annual-banner">
+            <div class="annual-icon">💰</div>
+            <div>
+              <div class="annual-label">Estimated Annual Margin Saved:</div>
+              <div class="annual-number" id="annual-savings">$205.20 / year</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Open vs Closed Feature Comparison Matrix -->
+        <div class="comparison-card">
+          <h3>The Open Innovation Advantage</h3>
+          <ul class="feature-checklist">
+            <li>
+              <div class="check-icon">✓</div>
+              <div>
+                <strong>Data Sovereignty & Privacy:</strong>
+                <span>Your customer notes and unpublished product lines are never fed into proprietary model retraining sets.</span>
+              </div>
+            </li>
+            <li>
+              <div class="check-icon">✓</div>
+              <div>
+                <strong>Zero Vendor Lock-In:</strong>
+                <span>Switch effortlessly from Llama 3.2 to Mistral 7B or Qwen 2.5 with a single click. You own your prompts and your runtime.</span>
+              </div>
+            </li>
+            <li>
+              <div class="check-icon">✓</div>
+              <div>
+                <strong>Fine-Tuning Potential:</strong>
+                <span>Open weights allow small shop owners to LoRA fine-tune on their exact brand voice and niche jargon.</span>
+              </div>
+            </li>
+            <li>
+              <div class="check-icon">✓</div>
+              <div>
+                <strong>Deploy Anywhere (Render Free/Starter Tier):</strong>
+                <span>No heavy GPU required. Serverless Hugging Face open routers or local Ollama instances keep deployment light and cost-effective.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPEN INNOVATION MANIFESTO (For DEV Challenge Post Submission) -->
+  <section class="section-container manifesto-section" id="open-manifesto">
+    <div class="container">
+      <div class="manifesto-box">
+        <div class="section-badge badge-purple">Open AI Core Story</div>
+        <h2>Why Open Innovation Matters for SnapList AI</h2>
+        <p class="manifesto-lead">
+          Building a real side hustle requires predictable margins and resilient tools. Here is why open-source AI is the foundational piece that makes SnapList AI viable:
+        </p>
+
+        <div class="manifesto-grid">
+          <div class="manifesto-pillar">
+            <div class="pillar-num">01</div>
+            <h4>Unit Economics that Scale</h4>
+            <p>Etsy, eBay, and Poshmark sellers already lose 10%–20% in platform fees, shipping materials, and payment processing. Adding recurring proprietary API fees makes small-scale resale unviable. Open-weight inference makes high-conversion copy available to everyone for pennies.</p>
+          </div>
+          <div class="manifesto-pillar">
+            <div class="pillar-num">02</div>
+            <h4>Niche Customization & Prompt Freedom</h4>
+            <p>Closed APIs regularly alter their safety guardrails and system prompts behind closed doors, breaking structured JSON outputs. Open-weight models like Qwen 2.5 and Mistral 7B maintain strict deterministic adherence for tag and SEO extraction.</p>
+          </div>
+          <div class="manifesto-pillar">
+            <div class="pillar-num">03</div>
+            <h4>Offline & Edge Resiliency</h4>
+            <p>Antique pickers, estate sale flippers, and flea market hunters often operate in basements or convention halls without reliable Wi-Fi. With our Ollama local integration, SnapList AI can run completely on a laptop with zero internet connection.</p>
+          </div>
+        </div>
+
+        <div class="render-banner">
+          <div class="render-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            <span>Ready for 1-Click Render Deployment</span>
+          </div>
+          <p>Packaged with a native Node.js web service architecture, zero heavyweight compilation dependencies, and production-tested environment handling for Render's cloud.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">Copied to clipboard!</div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <span class="footer-brand">SnapList AI</span>
+        <span>•</span>
+        <span>Built with Open-Weight Models for the DEV AI Side Hustle Challenge</span>
+      </div>
+      <div class="footer-right">
+        <span>Runs on Llama 3.2 • Mistral 7B • Qwen 2.5</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
